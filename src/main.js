@@ -65,6 +65,29 @@ class Game {
         this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
         this.scene.add(this.directionalLight);
 
+        
+        //테스트용 차체임
+        this.threeChassisBody = new THREE.Mesh(
+            new THREE.BoxGeometry(5,0.5,4),
+            new THREE.MeshBasicMaterial({'color':'gray'})
+        )
+        this.threeChassisBody.rotation.y = -Math.PI / 2
+            
+        this.scene.add(this.threeChassisBody)
+            
+        this.carPivot = new THREE.Object3D();
+        // this.carPivot.position.set(5,5,5)
+        this.carPivot.add(this.threeChassisBody);
+        this.scene.add(this.carPivot);
+
+        this.cameraPivot = new THREE.Object3D();
+        // this.cameraPivot.position.set(0, 0, 0);
+        this.cameraPivot.rotation.y = Math.PI;
+
+        this.carPivot.add(this.cameraPivot)
+        
+        this.cameraPivot.add(this.camera)
+
         this.initPhysics();
 
         window.addEventListener('resize', this.resize.bind(this))
@@ -138,7 +161,7 @@ class Game {
 
         
         /** 물리엔진 - 차체 생성 */
-        const chassisShape = new CANNON.Box(new CANNON.Vec3(4, 0.25, 2));
+        const chassisShape = new CANNON.Box(new CANNON.Vec3(2.5, 0.25, 2));
         const chassisBody = new CANNON.Body({
             mass: 150,
             shape: chassisShape,
@@ -161,7 +184,7 @@ class Game {
 
         // const wheelShape = new CANNON.Cylinder(1, 1, 1/2, 20)
         
-        const wheelShape = new CANNON.Sphere(1)
+        const wheelShape = new CANNON.Sphere(1.1)
         // const wheelShape = new CANNON.Cylinder(1,1,1,20,20);
 
         const axisWidth = 7;
@@ -411,6 +434,8 @@ class Game {
         window.addEventListener('keyup', this.onKeyUpEvt.bind(this));
 
 
+        //pivot camera test
+
 		this.animate();
 
     }
@@ -613,7 +638,18 @@ class Game {
             // console.log(this.BOODY_GROUP);
             this.CHASSIS_GROUP.position.copy(this.chassisBody.position)
             this.CHASSIS_GROUP.quaternion.copy(this.chassisBody.quaternion);
+
         }
+        
+        this.threeChassisBody.position.copy(this.chassisBody.position);
+        this.threeChassisBody.quaternion.copy(this.chassisBody.quaternion);
+
+        
+        
+        this.cameraPivot.position.copy(this.threeChassisBody.position)
+        this.cameraPivot.quaternion.copy(this.threeChassisBody.quaternion)
+        
+        this.camera.lookAt(this.threeChassisBody.position)
 
         // this.chassisMesh.position.copy(this.chassisBody.position);
         // this.chassisMesh.quaternion.copy(this.chassisBody.quaternion);

@@ -1,0 +1,39 @@
+body {
+	/** 기본적으로 HTML margin값이 있는데 제거*/
+	margin: 0;
+}
+#three-canvas {
+	width: 100vw;
+	height: 100vh;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+#gui {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	width: 100px;
+	padding: 0;
+	margin: 0;
+}
+
+button {
+	font-family: sans-serif;
+	font-size: 16px;
+	color: #fff;
+	background: #3A772C;
+	width: 100px;
+	height: 40px;
+	margin: 0 0 5px 0;
+	border: none;
+}
+
+.info {
+	position: absolute;
+	width: 400px;
+	height: 400px;
+	background-color: #fff;
+	z-index:3;
+}

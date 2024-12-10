@@ -66,7 +66,8 @@ class Game {
         this.scene.add(this.directionalLight);
 
         
-        //테스트용 차체임
+        // 테스트용 차체임
+        // 
         this.threeChassisBody = new THREE.Mesh(
             new THREE.BoxGeometry(5,0.5,4),
             new THREE.MeshBasicMaterial({'color':'gray'})
@@ -75,6 +76,7 @@ class Game {
             
         this.scene.add(this.threeChassisBody)
             
+        // 뒤에서 쫓아다니는 피봇에 카메라 연결을 어떻게 진행할 수 있을까?
         this.carPivot = new THREE.Object3D();
         // this.carPivot.position.set(5,5,5)
         this.carPivot.add(this.threeChassisBody);

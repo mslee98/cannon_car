@@ -73,7 +73,8 @@ class Game {
             new THREE.MeshBasicMaterial({'color':'gray'})
         )
         this.threeChassisBody.rotation.y = -Math.PI / 2
-            
+        this.threeChassisBody.material.wireframe = true; 
+        
         this.scene.add(this.threeChassisBody)
             
         // 뒤에서 쫓아다니는 피봇에 카메라 연결을 어떻게 진행할 수 있을까?
